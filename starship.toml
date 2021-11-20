@@ -15,8 +15,7 @@ right_format = """$all"""
 #[package]
 #disabled = true
 
-## section from github.com/ryo-ARAKI/starship.toml
-
+## section from github.com/ryo-ARAKI
 [battery]
 full_symbol = "🔋"
 charging_symbol = "🔌"
