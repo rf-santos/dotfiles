@@ -1,4 +1,4 @@
-# This file should reside in ~/.config/starship.toml
+# This file should reside in $HOME/.config/starship.toml
 
 # Prompt layout
 format = """$directory$git_branch$git_commit$git_state$git_status$character"""
@@ -7,15 +7,12 @@ right_format = """$all"""
 # Inserts a blank line between shell prompts
 #add_newline = true
 
-# Replace the "❯" symbol in the prompt with "➜"
-#[character]                            # The name of the module we are configuring is "character"
-#success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-
 # Disable the package module, hiding it from the prompt completely
 #[package]
 #disabled = true
 
 ## section from github.com/ryo-ARAKI
+
 [battery]
 full_symbol = "🔋"
 charging_symbol = "🔌"
