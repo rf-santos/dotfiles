@@ -13,6 +13,7 @@ if ! [[ $SHELL == '/usr/bin/zsh' ]]; then
 fi
 
 CURRENTHOME=$(eval echo "~$CURRENTUSER")
+curl -L git.io/antigen > "CURRENTHOME"/antigen.zsh
 
 sudo -i -u $CURRENTUSER bash << EOF
 echo "Running as user: "$CURRENTUSER""
@@ -21,11 +22,11 @@ echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 status=$?
 cargo --version
 
-if [[ "$status" -eq 0 ]]; then
-    echo "Rust language is already installed. Skipping..."
-else
+if [[ "$status" -eq 1 ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     exec "./"$0""
+else
+    echo "Rust language is already installed. Skipping..."
 fi
 
 curl -sS https://starship.rs/install.sh | sh
