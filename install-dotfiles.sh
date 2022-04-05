@@ -13,7 +13,7 @@ if ! [[ $SHELL == '/usr/bin/zsh' ]]; then
 fi
 
 CURRENTHOME=$(eval echo "~$CURRENTUSER")
-curl -L git.io/antigen > "CURRENTHOME"/antigen.zsh
+curl -L git.io/antigen > "$CURRENTHOME"/antigen.zsh
 
 sudo -i -u $CURRENTUSER bash << EOF
 echo "Running as user: "$CURRENTUSER""
