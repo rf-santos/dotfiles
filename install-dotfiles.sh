@@ -21,7 +21,7 @@ echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 # RUST AND RUST-BASED TOOLS
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-exec "./"$0""
+source $CURRENTHOME/.cargo/env
 
 curl -sS https://starship.rs/install.sh | sh
 
