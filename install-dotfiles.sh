@@ -19,6 +19,7 @@ echo "Running as user: "$CURRENTUSER""
 echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 
 curl -L git.io/antigen > antigen.zsh
+source "$CURRENTHOME"/antigen.zsh
 
 # RUST AND RUST-BASED TOOLS
 
