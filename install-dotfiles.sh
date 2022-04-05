@@ -19,8 +19,6 @@ sudo -i -u $CURRENTUSER bash << EOF
 echo "Running as user: "$CURRENTUSER""
 echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 # RUST AND RUST-BASED TOOLS
-status=$?
-cargo --version
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 exec "./"$0""
