@@ -126,6 +126,7 @@ unset __conda_setup
 
 
 source $HOME/antigen.zsh
+antigen init "$HOME"/.antigenrc
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle git

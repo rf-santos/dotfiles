@@ -14,9 +14,6 @@ fi
 
 CURRENTHOME=$(eval echo "~$CURRENTUSER")
 
-curl -L git.io/antigen > "$CURRENTHOME"/antigen.zsh
-source "$CURRENTHOME"/antigen.zsh
-
 sudo -i -u $CURRENTUSER bash << EOF
 echo "Running as user: "$CURRENTUSER""
 echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
@@ -37,6 +34,10 @@ cp -r -v -b "$DIR"/.zshrc "$CURRENTHOME"
 cp -r -v -b "$DIR"/.config/ "$CURRENTHOME"
 
 EOF
+
+curl -L git.io/antigen > "$CURRENTHOME"/antigen.zsh
+source "$CURRENTHOME"/.zshrc
+source "$CURRENTHOME"/antigen.zsh
 
 echo "Exiting user: "$CURRENTUSER""
 
