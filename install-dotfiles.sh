@@ -14,12 +14,14 @@ fi
 
 CURRENTHOME=$(eval echo "~$CURRENTUSER")
 
+curl -L git.io/antigen > "$CURRENTHOME"/antigen.zsh
+source "$CURRENTHOME"/antigen.zsh
+
 sudo -i -u $CURRENTUSER bash << EOF
 echo "Running as user: "$CURRENTUSER""
 echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 
-curl -L git.io/antigen > antigen.zsh
-source "$CURRENTHOME"/antigen.zsh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
 # RUST AND RUST-BASED TOOLS
 
