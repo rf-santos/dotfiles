@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/anaconda3/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/anaconda3/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/santos/.oh-my-zsh"
+export ZSH="/home/"$USER"/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,7 +70,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker history cargo rust bedtools samtools autojump zsh-autosuggestions)
+# plugins=(git docker history cargo rust bedtools samtools autojump zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias zconf="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
-alias incg='ssh -l rsantos cirrus.ncg.ingrid.pt'
+alias incd='ssh -l rsantos cirrus.ncg.ingrid.pt'
 alias winC='cd /mnt/c'
 alias winD='cd /mnt/d'
 alias winHome='cd /mnt/c/Users/ricar'
@@ -111,16 +111,33 @@ eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/santos/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/"$USER"/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/santos/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/santos/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/"$USER"/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/"$USER"/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/santos/anaconda3/bin:$PATH"
+        export PATH="/home/"$USER"/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+source $HOME/antigen.zsh
+
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle git
+antigen bundle pip
+antigen bundle conda
+antigen bundle docker
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen apply
+
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
+export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+export LIBGL_ALWAYS_INDIRECT=1 #GWSL

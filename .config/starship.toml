@@ -1,8 +1,10 @@
-# This file should reside in $HOME/.config/starship.toml
-
 # Prompt layout
-format = """$directory$git_branch$git_commit$git_state$git_status$character"""
+format = """
+$directory$git_branch$git_commit$git_state$git_status$character"""
+
 right_format = """$all"""
+
+scan_timeout = 100
 
 # Inserts a blank line between shell prompts
 #add_newline = true
@@ -12,6 +14,9 @@ right_format = """$all"""
 #disabled = true
 
 ## section from github.com/ryo-ARAKI
+[cmd_duration]
+format = "| [$duration](bold yellow)"
+
 
 [battery]
 full_symbol = "🔋"
@@ -66,9 +71,23 @@ symbol = "   "
 disabled = true
 
 [conda]
-format = "[$symbol conda env: $environment]($style) "
+format = "[$symbol conda env:]($style) [$environment](white) "
 truncation_length = 0
-symbol = ""
+symbol = " "
 style = "fg:155"
 ignore_base = true
 disabled = false
+
+[hostname]
+ssh_only = false
+trim_at = "."
+disabled = false
+style = "bold #87A752"
+format = "   [$hostname](bold #87A752) "
+
+[username]
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style)"
+disabled = false
+show_always = true
