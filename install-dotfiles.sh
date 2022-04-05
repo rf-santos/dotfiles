@@ -22,12 +22,8 @@ echo ""$CURRENTUSER" home directory is: "$CURRENTHOME""
 status=$?
 cargo --version
 
-if [[ "$status" -eq 1 ]]; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    exec "./"$0""
-else
-    echo "Rust language is already installed. Skipping..."
-fi
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+exec "./"$0""
 
 curl -sS https://starship.rs/install.sh | sh
 
@@ -36,7 +32,6 @@ cargo install exa
 cp -r -v -b "$DIR"/.bashrc "$CURRENTHOME"
 cp -r -v -b "$DIR"/.zshrc "$CURRENTHOME"
 cp -r -v -b "$DIR"/.config/ "$CURRENTHOME"
-rm "$CURRENTHOME"/install-dotfiles.sh
 
 EOF
 
