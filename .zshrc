@@ -1,3 +1,4 @@
+source ~/zsh-snap/znap.zsh
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$HOME/anaconda3/bin:$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +9,7 @@ export ZSH="/home/"$USER"/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="amuse"
+#ZSH_THEME="amuse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -32,7 +33,7 @@ ZSH_THEME="amuse"
 # zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -41,11 +42,11 @@ ZSH_THEME="amuse"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# COMPLETION_WAITING_DOTS="%F{yellow}Do or do not. There is no try...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
@@ -70,7 +71,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git docker history cargo rust bedtools samtools autojump zsh-autosuggestions)
+plugins=(git docker rust colored-man-pages fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,45 +101,53 @@ source $ZSH/oh-my-zsh.sh
 alias zconf="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
 alias incd='ssh -l rsantos cirrus.ncg.ingrid.pt'
-alias winC='cd /mnt/c'
-alias winD='cd /mnt/d'
 alias winHome='cd /mnt/c/Users/ricar'
-alias OneDriveNMS='cd /mnt/d/OneDrive\ -\ NOVA\ Medical\ School'
 alias tree='exa --tree -F'
 alias ll='exa -Fla'
-
-eval "$(starship init zsh)"
+alias gs='git status'
+alias gcm='git commit'
+alias gp='git push'
+alias gcl='git clone'
+alias ga='git add'
+alias grm='git rm'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/"$USER"/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/santos/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/"$USER"/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/"$USER"/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/santos/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/santos/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/"$USER"/miniconda3/bin:$PATH"
+        export PATH="/home/santos/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 
-source $HOME/antigen.zsh
-antigen init "$HOME"/.antigenrc
-
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle git
-antigen bundle pip
-antigen bundle conda
-antigen bundle docker
-
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-antigen apply
-
-
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
 export LIBGL_ALWAYS_INDIRECT=1 #GWSL
+
+# Download Znap, if it's not there yet.
+[[ -f ~/Git/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
+
+source ~/Git/zsh-snap/znap.zsh  # Start Znap
+
+# `znap prompt` makes your prompt visible in just 15-40ms!
+#znap prompt sindresorhus/pure
+
+# `znap source` automatically downloads and starts your plugins.
+znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+
+  export PATH="${PATH}:/home/santos/.cargo/bin/navi"
+fpath=(~/.zsh.d/ $fpath)
+
+eval "$(starship init zsh)"
+
